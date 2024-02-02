@@ -1,7 +1,7 @@
 spring:
   datasource:
-    username: postgres
-    url: jdbc:postgresql://localhost:5432/b
+    username: admin
+    url: jdbc:postgresql://localhost:5432/livraria
     platform: postgres
     password: admin
   jpa:
