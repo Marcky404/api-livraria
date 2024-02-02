@@ -3,7 +3,7 @@ package io.github.Marcky404.Biblioteca.controller;
 import io.github.Marcky404.Biblioteca.domain.Genero;
 import io.github.Marcky404.Biblioteca.domain.request.GeneroRequest;
 import io.github.Marcky404.Biblioteca.service.GeneroService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -12,12 +12,11 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/genero")
 public class GeneroController {
 
-    @Autowired
-    private GeneroService service;
-
+    private final GeneroService service;
 
     @PostMapping
     public ResponseEntity salvar(@RequestBody Genero genero) {
@@ -32,24 +31,22 @@ public class GeneroController {
     }
 
     @GetMapping
-    public ResponseEntity<Genero> buscar(@RequestParam("id") Long id){
+    public ResponseEntity<Genero> buscar(@RequestParam("id") Long id) {
         return ResponseEntity.ok(service.buscar(id));
     }
 
     @GetMapping("/listar-todos")
-    public ResponseEntity<List<Genero>> listarTodos(){
+    public ResponseEntity<List<Genero>> listarTodos() {
         return ResponseEntity.ok(service.listarTodos());
     }
 
-
-
     @PutMapping("/{id}")
-    public ResponseEntity<Genero> atualizar(@PathVariable("id") Long id, @RequestBody GeneroRequest generoRequest){
+    public ResponseEntity<Genero> atualizar(@PathVariable("id") Long id, @RequestBody GeneroRequest generoRequest) {
         return ResponseEntity.ok(service.atualizar(id, generoRequest));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity deletar(@PathVariable("id") Long id){
+    public ResponseEntity deletar(@PathVariable("id") Long id) {
         service.deletar(id);
         return ResponseEntity.noContent().build();
     }
