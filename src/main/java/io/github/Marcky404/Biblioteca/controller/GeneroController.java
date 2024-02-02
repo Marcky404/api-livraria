@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/genero")
@@ -34,6 +35,12 @@ public class GeneroController {
     public ResponseEntity<Genero> buscar(@RequestParam("id") Long id){
         return ResponseEntity.ok(service.buscar(id));
     }
+
+    @GetMapping("/listar-todos")
+    public ResponseEntity<List<Genero>> listarTodos(){
+        return ResponseEntity.ok(service.listarTodos());
+    }
+
 
 
     @PutMapping("/{id}")
