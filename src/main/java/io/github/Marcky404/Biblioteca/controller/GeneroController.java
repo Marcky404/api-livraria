@@ -29,5 +29,11 @@ public class GeneroController {
         return ResponseEntity.created(location).build();
     }
 
+    @GetMapping
+    public ResponseEntity<Genero> buscar(@RequestParam("id") Long id){
+        return ResponseEntity.ok(service.buscar(id));
+    }
+
+
 
 }
