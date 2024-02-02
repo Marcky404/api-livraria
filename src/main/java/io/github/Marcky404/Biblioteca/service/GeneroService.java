@@ -3,17 +3,17 @@ package io.github.Marcky404.Biblioteca.service;
 import io.github.Marcky404.Biblioteca.domain.Genero;
 import io.github.Marcky404.Biblioteca.domain.request.GeneroRequest;
 import io.github.Marcky404.Biblioteca.repository.GeneroRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@RequiredArgsConstructor
 @Service
 public class GeneroService {
 
-    @Autowired
-    private GeneroRepository repository;
+    private final GeneroRepository repository;
 
     public void salvar(Genero genero) {
         repository.save(genero);
