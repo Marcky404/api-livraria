@@ -16,4 +16,9 @@ public class Genero {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String genero;
+
+
+    public void setGenero(String genero) {
+        this.genero = genero.toUpperCase();
+    }
 }

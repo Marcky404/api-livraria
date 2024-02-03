@@ -1,6 +1,6 @@
 package io.github.Marcky404.Biblioteca.domain.request;
 
-import io.github.Marcky404.Biblioteca.domain.enuns.Genero;
+import io.github.Marcky404.Biblioteca.domain.Genero;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
