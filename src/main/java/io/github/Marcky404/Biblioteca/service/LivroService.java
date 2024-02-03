@@ -1,22 +1,24 @@
 package io.github.Marcky404.Biblioteca.service;
 
+import io.github.Marcky404.Biblioteca.domain.Genero;
 import io.github.Marcky404.Biblioteca.domain.Livro;
-import io.github.Marcky404.Biblioteca.domain.enuns.Genero;
 import io.github.Marcky404.Biblioteca.domain.request.LivroLoteRequest;
 import io.github.Marcky404.Biblioteca.domain.request.LivroQuantidadeTotalGenero;
 import io.github.Marcky404.Biblioteca.domain.request.LivroRequest;
 import io.github.Marcky404.Biblioteca.repository.LivroRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class LivroService {
 
-    @Autowired
-    private LivroRepository repository;
+
+    private final LivroRepository repository;
+    private final GeneroService generoService;
 
 
     public void salvar(Livro livro) {
@@ -30,12 +32,14 @@ public class LivroService {
 
     @Transactional
     public Livro atualiar(Long id, LivroRequest livroRequest) {
+
         Livro livro = buscar(id);
+        Genero genero = generoService.buscar(livroRequest.getGenero().getId());
 
         livro.setTitulo(livroRequest.getTitulo());
         livro.setAutor(livroRequest.getAutor());
         livro.setNumeroPaginas(livroRequest.getNumeroPaginas());
-        livro.setGenero(livroRequest.getGenero());
+        livro.setGenero(genero);
         livro.setIsbn(livroRequest.getIsbn());
         livro.setDisponibilidade(livroRequest.getDisponibilidade());
         livro.setValor(livroRequest.getValor());
@@ -59,11 +63,11 @@ public class LivroService {
         return repository.findByLivroOrderByValorAsc();
     }
 
-    public List<Livro> buscarListaDeLivrosPorGenero(Genero genero){
-        return repository.findByLivroByGenero(genero);
+    public List<Livro> buscarListaDeLivrosPorGenero(Long generoID) {
+        return repository.findByLivroByGenero(generoID);
     }
 
-   public List<LivroQuantidadeTotalGenero> buscarLivroQuantidadeTotalGenero(){
+    public List<LivroQuantidadeTotalGenero> buscarLivroQuantidadeTotalGenero() {
         return repository.findByLivroQuantidadeTotalGenero();
-   }
+    }
 }

@@ -1,11 +1,11 @@
 package io.github.Marcky404.Biblioteca.controller;
 
 import io.github.Marcky404.Biblioteca.domain.Livro;
-import io.github.Marcky404.Biblioteca.domain.enuns.Genero;
 import io.github.Marcky404.Biblioteca.domain.request.LivroLoteRequest;
 import io.github.Marcky404.Biblioteca.domain.request.LivroQuantidadeTotalGenero;
 import io.github.Marcky404.Biblioteca.domain.request.LivroRequest;
 import io.github.Marcky404.Biblioteca.service.LivroService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,11 +16,12 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/livro")
 public class LivroController {
 
-    @Autowired
-    private LivroService service;
+
+    private final LivroService service;
 
 
     @PostMapping
@@ -56,9 +57,9 @@ public class LivroController {
         return ResponseEntity.ok(service.buscarListaDeLivrosOrdenadoPorMenorValor());
     }
 
-    @GetMapping("/lista-por-genero")
-    public ResponseEntity<List<Livro>> buscarListaDeLivrosPorGenero(@RequestParam("genero") Genero genero) {
-        return ResponseEntity.ok(service.buscarListaDeLivrosPorGenero(genero));
+    @GetMapping("/lista-por-genero/{generoID}")
+    public ResponseEntity<List<Livro>> buscarListaDeLivrosPorGenero(@PathVariable("generoID") Long generoID) {
+        return ResponseEntity.ok(service.buscarListaDeLivrosPorGenero(generoID));
     }
 
     @GetMapping("/quantidade-total-genero")

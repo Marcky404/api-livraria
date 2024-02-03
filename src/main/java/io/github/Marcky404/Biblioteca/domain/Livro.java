@@ -1,7 +1,6 @@
 package io.github.Marcky404.Biblioteca.domain;
 
 import io.github.Marcky404.Biblioteca.domain.enuns.Disponibilidade;
-import io.github.Marcky404.Biblioteca.domain.enuns.Genero;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,6 +8,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 @AllArgsConstructor
@@ -28,8 +28,11 @@ public class Livro {
     @Column(name = "ano_publicacao")
     private Integer anoPublicacao;
     private String isbn;
-    @Enumerated(EnumType.STRING)
+
+    @ManyToOne
+    @JoinColumn(name = "genero_id")
     private Genero genero;
+
     @Column(name = "numero_paginas")
     private Integer numeroPaginas;
     @Enumerated(EnumType.STRING)
