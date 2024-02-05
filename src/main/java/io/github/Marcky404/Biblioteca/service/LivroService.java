@@ -2,6 +2,7 @@ package io.github.Marcky404.Biblioteca.service;
 
 import io.github.Marcky404.Biblioteca.domain.Genero;
 import io.github.Marcky404.Biblioteca.domain.Livro;
+import io.github.Marcky404.Biblioteca.domain.enums.MensagemErro;
 import io.github.Marcky404.Biblioteca.domain.request.LivroLoteRequest;
 import io.github.Marcky404.Biblioteca.domain.request.LivroQuantidadeTotalGenero;
 import io.github.Marcky404.Biblioteca.domain.request.LivroRequest;
@@ -26,12 +27,12 @@ public class LivroService {
     }
 
     public Livro buscar(Long id) {
-        return repository.findById(id).orElseThrow(() -> new RuntimeException("Livro não encontrado para o id: " + id));
+        return repository.findById(id).orElseThrow(MensagemErro.LIVRO_NAO_ENCONTRADO::asBusinessException);
     }
 
 
     @Transactional
-    public Livro atualiar(Long id, LivroRequest livroRequest) {
+    public Livro atualizar(Long id, LivroRequest livroRequest) {
 
         Livro livro = buscar(id);
         Genero genero = generoService.buscar(livroRequest.getGenero().getId());

@@ -1,7 +1,10 @@
 package io.github.Marcky404.Biblioteca.domain;
 
-import io.github.Marcky404.Biblioteca.domain.enuns.Tipo;
+import io.github.Marcky404.Biblioteca.domain.enums.TipoTelefone;
+import io.github.Marcky404.Biblioteca.utils.Utils;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,9 +19,15 @@ public class Telefone {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String ddd;
+    private Integer ddd;
     private String numero;
     @Enumerated(EnumType.STRING)
-    private Tipo tipo;
+    private TipoTelefone tipoTelefone;
 
+
+    public Telefone(Integer ddd, String numero, TipoTelefone tipoTelefone) {
+        this.ddd = ddd;
+        this.numero = numero;
+        this.tipoTelefone = tipoTelefone;
+    }
 }

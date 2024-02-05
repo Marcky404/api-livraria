@@ -6,7 +6,6 @@ import io.github.Marcky404.Biblioteca.domain.request.LivroQuantidadeTotalGenero;
 import io.github.Marcky404.Biblioteca.domain.request.LivroRequest;
 import io.github.Marcky404.Biblioteca.service.LivroService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -71,7 +70,7 @@ public class LivroController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Livro> atualizar(@PathVariable("id") Long id, @RequestBody LivroRequest livroRequest) {
-        Livro livro = service.atualiar(id, livroRequest);
+        Livro livro = service.atualizar(id, livroRequest);
         return ResponseEntity.ok(livro);
     }
 

@@ -1,6 +1,7 @@
 package io.github.Marcky404.Biblioteca.service;
 
 import io.github.Marcky404.Biblioteca.domain.Genero;
+import io.github.Marcky404.Biblioteca.domain.enums.MensagemErro;
 import io.github.Marcky404.Biblioteca.domain.request.GeneroRequest;
 import io.github.Marcky404.Biblioteca.repository.GeneroRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +21,7 @@ public class GeneroService {
     }
 
     public Genero buscar(Long id) {
-        return repository.findById(id).orElseThrow(() -> new RuntimeException("Genero não localizado!"));
+        return repository.findById(id).orElseThrow(MensagemErro.GENERO_NAO_ENCONTRADO::asBusinessException);
     }
 
     @Transactional
