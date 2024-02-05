@@ -1,7 +1,9 @@
 package io.github.Marcky404.Biblioteca.controller;
 
 import io.github.Marcky404.Biblioteca.domain.Cliente;
+import io.github.Marcky404.Biblioteca.domain.request.ClienteRequest;
 import io.github.Marcky404.Biblioteca.service.ClienteService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,8 +23,8 @@ public class ClienteController {
 
 
     @PostMapping
-    public ResponseEntity salvar(@RequestBody Cliente cliente){
-        service.salvar(cliente);
+    public ResponseEntity salvar(@RequestBody @Valid ClienteRequest clienteRequest){
+        Cliente cliente =service.salvar(clienteRequest);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
