@@ -2,7 +2,6 @@ package io.github.Marcky404.Biblioteca.exception;
 
 import io.github.Marcky404.Biblioteca.domain.enums.MensagemErro;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +13,7 @@ import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.context.request.ServletWebRequest;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
@@ -34,7 +34,8 @@ public class ControlExceptionHandler {
     @ExceptionHandler(value = {BusinessException.class})
     protected ResponseEntity<Object> handleConflict(BusinessException ex, WebRequest request) {
 
-        log.info("Customer BusinessException httpStatusCode={}, message={}, description={}", ex.getHttpStatusCode() != null ? ex.getHttpStatusCode().toString() : null, ex.getMessage(), ex.getDescription());
+        String path = getPath(request);
+        log.info("Livro BusinessException httpStatusCode={}, message={}, description={}", ex.getHttpStatusCode() != null ? ex.getHttpStatusCode().toString() : null, ex.getMessage(), ex.getDescription());
         return ResponseEntity.status(ex.getHttpStatusCode()).body(ex.getOnlyBody());
 
     }
@@ -47,16 +48,17 @@ public class ControlExceptionHandler {
     @ExceptionHandler({MethodArgumentTypeMismatchException.class})
     public ResponseEntity<Object> handleMethodArgumentTypeMismatch(MethodArgumentTypeMismatchException exMethod,
                                                                    WebRequest request) {
-
+        String path = getPath(request);
         String error = exMethod.getName() + " should be " + exMethod.getRequiredType().getName();
 
         BusinessException ex = BusinessException.builder()
                 .httpStatusCode(HttpStatus.BAD_REQUEST)
                 .message(CONSTRAINT_VALIDATION_FAILED)
                 .description(error)
+                .path(path)
                 .build();
 
-        log.info("Customer failed MethodArgumentTypeMismatchException httpStatusCode={}, message={}, description={}", ex.getHttpStatusCode().toString(), ex.getMessage(), ex.getDescription());
+        log.info("Livro failed MethodArgumentTypeMismatchException httpStatusCode={}, message={}, description={}", ex.getHttpStatusCode().toString(), ex.getMessage(), ex.getDescription());
 
         return ResponseEntity.status(ex.getHttpStatusCode()).body(ex.getOnlyBody());
     }
@@ -68,6 +70,9 @@ public class ControlExceptionHandler {
      */
     @ExceptionHandler({ConstraintViolationException.class})
     public ResponseEntity<Object> handleConstraintViolation(ConstraintViolationException exMethod, WebRequest request) {
+
+        String path = getPath(request);
+
         List<String> errors = new ArrayList<>();
         for (ConstraintViolation<?> violation : exMethod.getConstraintViolations()) {
             errors.add(violation.getRootBeanClass().getName() + " " + violation.getPropertyPath() + ": "
@@ -77,11 +82,13 @@ public class ControlExceptionHandler {
                 .httpStatusCode(HttpStatus.BAD_REQUEST)
                 .message(CONSTRAINT_VALIDATION_FAILED)
                 .description(errors.toString())
+                .path(path)
                 .build();
 
-        log.info("Customer failed ConstraintViolationException httpStatusCode={}, message={}, description={}", ex.getHttpStatusCode().toString(), ex.getMessage(), ex.getDescription());
+        log.info("Livro failed ConstraintViolationException httpStatusCode={}, message={}, description={}", ex.getHttpStatusCode().toString(), ex.getMessage(), ex.getDescription());
         return ResponseEntity.status(ex.getHttpStatusCode()).body(ex.getOnlyBody());
     }
+
     /**
      * @param exMethod
      * @param request
@@ -98,7 +105,7 @@ public class ControlExceptionHandler {
                 .path(request.getDescription(false))
                 .build();
 
-        log.info("Customer failed ConstraintViolationException httpStatusCode={}, message={}, description={}", ex.getHttpStatusCode().toString(), ex.getMessage(), ex.getDescription());
+        log.info("Livro failed ConstraintViolationException httpStatusCode={}, message={}, description={}", ex.getHttpStatusCode().toString(), ex.getMessage(), ex.getDescription());
         return ResponseEntity.status(ex.getHttpStatusCode()).body(ex.getOnlyBody());
     }
 
@@ -107,8 +114,9 @@ public class ControlExceptionHandler {
      * @return
      */
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<Object> validationError(MethodArgumentNotValidException exMethod) {
+    public ResponseEntity<Object> validationError(MethodArgumentNotValidException exMethod, WebRequest request) {
 
+        String path = getPath(request);
         BindingResult bindingResult = exMethod.getBindingResult();
         List<FieldError> fieldErrors = bindingResult.getFieldErrors();
         var message = fieldErrors.stream().findFirst().get().getDefaultMessage();
@@ -121,6 +129,7 @@ public class ControlExceptionHandler {
                 .httpStatusCode(HttpStatus.BAD_REQUEST)
                 .description(fieldErrorDtos.toString())
                 .message(CONSTRAINT_VALIDATION_FAILED)
+                .path(path)
                 .build();
 
 
@@ -132,62 +141,79 @@ public class ControlExceptionHandler {
      * @return
      */
     @ExceptionHandler(HttpMessageNotReadableException.class)
-    public ResponseEntity<Object> validationError(HttpMessageNotReadableException exMethod) {
+    public ResponseEntity<Object> validationError(HttpMessageNotReadableException exMethod, WebRequest request) {
 
-
+        String path = getPath(request);
         String message = exMethod.getMostSpecificCause().getMessage();
 
         BusinessException ex = BusinessException.builder()
                 .httpStatusCode(HttpStatus.BAD_REQUEST)
                 .message(CONSTRAINT_VALIDATION_FAILED)
                 .description(message)
+                .path(path)
                 .build();
 
 
-        log.info("Customer failed HttpMessageNotReadableException httpStatusCode={}, message={}, description={}", ex.getHttpStatusCode().toString(), ex.getMessage(), ex.getDescription());
+        log.info("Livro failed HttpMessageNotReadableException httpStatusCode={}, message={}, description={}", ex.getHttpStatusCode().toString(), ex.getMessage(), ex.getDescription());
 
         return ResponseEntity.status(ex.getHttpStatusCode()).body(ex.getOnlyBody());
     }
 
     @ExceptionHandler({IllegalArgumentException.class})
-    public ResponseEntity<Object> handleIllegalArgumentException(IllegalArgumentException illegalArgumentException) {
+    public ResponseEntity<Object> handleIllegalArgumentException(IllegalArgumentException illegalArgumentException, WebRequest request) {
+
+        String path = getPath(request);
+
         BusinessException ex = BusinessException.builder()
                 .httpStatusCode(HttpStatus.BAD_REQUEST)
                 .message(MensagemErro.ILLEGAL_ARGUMENT_EXCEPTION.getMessage())
                 .description(ExceptionResolver.getRootException(illegalArgumentException))
+                .path(path)
                 .build();
 
 
-        log.info("Customer failed IllegalArgumentException httpStatusCode={}, message={}, description={}", ex.getHttpStatusCode().toString(), ex.getMessage(), ex.getDescription());
+        log.info("Livro failed IllegalArgumentException httpStatusCode={}, message={}, description={}", ex.getHttpStatusCode().toString(), ex.getMessage(), ex.getDescription());
 
         return ResponseEntity.status(ex.getHttpStatusCode()).body(ex.getOnlyBody());
     }
 
     @ExceptionHandler(value = {HttpMediaTypeNotSupportedException.class})
-    protected ResponseEntity<Object> handleHttpMediaTypeNotSupportedException(HttpMediaTypeNotSupportedException httpMediaTypeNotSupportedException) {
+    protected ResponseEntity<Object> handleHttpMediaTypeNotSupportedException(HttpMediaTypeNotSupportedException httpMediaTypeNotSupportedException, WebRequest request) {
+
+        String path = getPath(request);
+
         BusinessException ex = BusinessException.builder()
                 .httpStatusCode(MensagemErro.HTTP_MEDIA_TYPE_NOT_SUPPORTED_EXCEPTION.getStatus())
                 .message(MensagemErro.HTTP_MEDIA_TYPE_NOT_SUPPORTED_EXCEPTION.getMessage())
                 .description(ExceptionResolver.getRootException(httpMediaTypeNotSupportedException))
+                .path(path)
                 .build();
 
 
-        log.info("Customer failed httpMediaTypeNotSupportedException httpStatusCode={}, message={}, description={}", ex.getHttpStatusCode().toString(), ex.getMessage(), ex.getDescription());
+        log.info("Livro failed httpMediaTypeNotSupportedException httpStatusCode={}, message={}, description={}", ex.getHttpStatusCode().toString(), ex.getMessage(), ex.getDescription());
 
         return ResponseEntity.status(ex.getHttpStatusCode()).body(ex.getOnlyBody());
     }
 
     @ExceptionHandler(value = {HttpRequestMethodNotSupportedException.class})
-    protected ResponseEntity<Object> handleHttpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException httpRequestMethodNotSupportedException) {
+    protected ResponseEntity<Object> handleHttpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException httpRequestMethodNotSupportedException, WebRequest request) {
+
+        String path = getPath(request);
+
         BusinessException ex = BusinessException.builder()
                 .httpStatusCode(MensagemErro.HTTP_REQUEST_METHOD_NOT_SUPPORTED_EXCEPTION.getStatus())
                 .message(MensagemErro.HTTP_REQUEST_METHOD_NOT_SUPPORTED_EXCEPTION.getMessage())
                 .description(ExceptionResolver.getRootException(httpRequestMethodNotSupportedException))
+                .path(path)
                 .build();
 
 
-        log.info("Customer failed httpRequestMethodNotSupportedException httpStatusCode={}, message={}, description={}", ex.getHttpStatusCode().toString(), ex.getMessage(), ex.getDescription());
+        log.info("Livro failed httpRequestMethodNotSupportedException httpStatusCode={}, message={}, description={}", ex.getHttpStatusCode().toString(), ex.getMessage(), ex.getDescription());
 
         return ResponseEntity.status(ex.getHttpStatusCode()).body(ex.getOnlyBody());
+    }
+
+    private static String getPath(WebRequest request) {
+        return ((ServletWebRequest) request).getRequest().getRequestURI();
     }
 }
