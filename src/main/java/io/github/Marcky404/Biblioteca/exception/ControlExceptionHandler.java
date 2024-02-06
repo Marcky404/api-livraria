@@ -35,7 +35,7 @@ public class ControlExceptionHandler {
     protected ResponseEntity<Object> handleConflict(BusinessException ex, WebRequest request) {
 
         String path = getPath(request);
-        log.info("Livro BusinessException httpStatusCode={}, message={}, description={}", ex.getHttpStatusCode() != null ? ex.getHttpStatusCode().toString() : null, ex.getMessage(), ex.getDescription());
+        log.info("Livraria BusinessException httpStatusCode={}, message={}, description={}", ex.getHttpStatusCode() != null ? ex.getHttpStatusCode().toString() : null, ex.getMessage(), ex.getDescription());
         return ResponseEntity.status(ex.getHttpStatusCode()).body(ex.getOnlyBody());
 
     }
@@ -58,7 +58,7 @@ public class ControlExceptionHandler {
                 .path(path)
                 .build();
 
-        log.info("Livro failed MethodArgumentTypeMismatchException httpStatusCode={}, message={}, description={}", ex.getHttpStatusCode().toString(), ex.getMessage(), ex.getDescription());
+        log.info("Livraria failed MethodArgumentTypeMismatchException httpStatusCode={}, message={}, description={}", ex.getHttpStatusCode().toString(), ex.getMessage(), ex.getDescription());
 
         return ResponseEntity.status(ex.getHttpStatusCode()).body(ex.getOnlyBody());
     }
@@ -85,7 +85,7 @@ public class ControlExceptionHandler {
                 .path(path)
                 .build();
 
-        log.info("Livro failed ConstraintViolationException httpStatusCode={}, message={}, description={}", ex.getHttpStatusCode().toString(), ex.getMessage(), ex.getDescription());
+        log.info("Livraria failed ConstraintViolationException httpStatusCode={}, message={}, description={}", ex.getHttpStatusCode().toString(), ex.getMessage(), ex.getDescription());
         return ResponseEntity.status(ex.getHttpStatusCode()).body(ex.getOnlyBody());
     }
 
@@ -105,7 +105,7 @@ public class ControlExceptionHandler {
                 .path(request.getDescription(false))
                 .build();
 
-        log.info("Livro failed ConstraintViolationException httpStatusCode={}, message={}, description={}", ex.getHttpStatusCode().toString(), ex.getMessage(), ex.getDescription());
+        log.info("Livraria failed DataIntegrityViolationException httpStatusCode={}, message={}, description={}", ex.getHttpStatusCode().toString(), ex.getMessage(), ex.getDescription());
         return ResponseEntity.status(ex.getHttpStatusCode()).body(ex.getOnlyBody());
     }
 
@@ -154,7 +154,7 @@ public class ControlExceptionHandler {
                 .build();
 
 
-        log.info("Livro failed HttpMessageNotReadableException httpStatusCode={}, message={}, description={}", ex.getHttpStatusCode().toString(), ex.getMessage(), ex.getDescription());
+        log.info("Livraria failed HttpMessageNotReadableException httpStatusCode={}, message={}, description={}", ex.getHttpStatusCode().toString(), ex.getMessage(), ex.getDescription());
 
         return ResponseEntity.status(ex.getHttpStatusCode()).body(ex.getOnlyBody());
     }
@@ -172,7 +172,7 @@ public class ControlExceptionHandler {
                 .build();
 
 
-        log.info("Livro failed IllegalArgumentException httpStatusCode={}, message={}, description={}", ex.getHttpStatusCode().toString(), ex.getMessage(), ex.getDescription());
+        log.info("Livraria failed IllegalArgumentException httpStatusCode={}, message={}, description={}", ex.getHttpStatusCode().toString(), ex.getMessage(), ex.getDescription());
 
         return ResponseEntity.status(ex.getHttpStatusCode()).body(ex.getOnlyBody());
     }
@@ -190,7 +190,7 @@ public class ControlExceptionHandler {
                 .build();
 
 
-        log.info("Livro failed httpMediaTypeNotSupportedException httpStatusCode={}, message={}, description={}", ex.getHttpStatusCode().toString(), ex.getMessage(), ex.getDescription());
+        log.info("Livraria failed httpMediaTypeNotSupportedException httpStatusCode={}, message={}, description={}", ex.getHttpStatusCode().toString(), ex.getMessage(), ex.getDescription());
 
         return ResponseEntity.status(ex.getHttpStatusCode()).body(ex.getOnlyBody());
     }
@@ -208,7 +208,7 @@ public class ControlExceptionHandler {
                 .build();
 
 
-        log.info("Livro failed httpRequestMethodNotSupportedException httpStatusCode={}, message={}, description={}", ex.getHttpStatusCode().toString(), ex.getMessage(), ex.getDescription());
+        log.info("Livraria failed httpRequestMethodNotSupportedException httpStatusCode={}, message={}, description={}", ex.getHttpStatusCode().toString(), ex.getMessage(), ex.getDescription());
 
         return ResponseEntity.status(ex.getHttpStatusCode()).body(ex.getOnlyBody());
     }
