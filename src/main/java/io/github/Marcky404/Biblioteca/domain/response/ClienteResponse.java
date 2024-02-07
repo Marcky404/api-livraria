@@ -31,16 +31,14 @@ public class ClienteResponse {
     private Sexo sexo;
     private LocalDate dataNascimento;
 
-
-    public ClienteResponse converterParaEntidade(Cliente cliente) {
-
-        nome = cliente.getNome();
-        sobrenome = cliente.getSobrenome();
-        cpf = cliente.getCpf();
-        status = cliente.getStatus();
-        email = cliente.getEmail();
-        sexo = cliente.getSexo();
-        dataNascimento = cliente.getDataNascimento();
-        return  new ClienteResponse(nome,sobrenome,cpf,status,email,sexo,dataNascimento);
+    public ClienteResponse(Cliente cliente) {
+        this.nome = cliente.getNome();
+        this.sobrenome = cliente.getSobrenome();
+        this.cpf = cliente.getCpf();
+        this.status = cliente.getStatus();
+        this.email = cliente.getEmail();
+        this.sexo = cliente.getSexo();
+        this.dataNascimento = cliente.getDataNascimento();
     }
+
 }

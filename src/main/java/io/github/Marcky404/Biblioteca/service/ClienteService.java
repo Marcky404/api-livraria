@@ -75,8 +75,7 @@ public class ClienteService {
         cliente.setSobrenome(clienteAtualizarRequest.getSobrenome());
         cliente.setEmail(clienteAtualizarRequest.getEmail());
 
-        ClienteResponse clienteResponse = new ClienteResponse();
-        return clienteResponse.converterParaEntidade(cliente);
+        return new ClienteResponse(cliente);
 
     }
 
