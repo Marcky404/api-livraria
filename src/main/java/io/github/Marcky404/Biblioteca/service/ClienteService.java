@@ -4,9 +4,11 @@ import io.github.Marcky404.Biblioteca.domain.Cliente;
 import io.github.Marcky404.Biblioteca.domain.Endereco;
 import io.github.Marcky404.Biblioteca.domain.Telefone;
 import io.github.Marcky404.Biblioteca.domain.enums.MensagemErro;
+import io.github.Marcky404.Biblioteca.domain.request.ClienteAtualizarRequest;
 import io.github.Marcky404.Biblioteca.domain.request.ClienteRequest;
 import io.github.Marcky404.Biblioteca.domain.request.EnderecoRequest;
 import io.github.Marcky404.Biblioteca.domain.request.TelefoneRequest;
+import io.github.Marcky404.Biblioteca.domain.response.ClienteResponse;
 import io.github.Marcky404.Biblioteca.repository.ClienteRepository;
 import io.github.Marcky404.Biblioteca.utils.Utils;
 import lombok.RequiredArgsConstructor;
@@ -64,22 +66,19 @@ public class ClienteService {
         return repository.findById(id).orElseThrow(MensagemErro.CLIENTE_NAO_ENCONTRADO::asBusinessException);
     }
 
-//    @Transactional
-//    public Cliente atualizar(Long id, ClienteRequest clienteRequest) {
-//
-//        Cliente cliente = buscar(id);
-//
-//        cliente.setNome(clienteRequest.getNome());
-//        cliente.setSobrenome(clienteRequest.getSobrenome());
-//        cliente.setCpf(clienteRequest.getCpf());
-//        cliente.setSexo(clienteRequest.getSexo());
-//        cliente.setTelefones(clienteRequest.getTelefones());
-//        cliente.setEnderecos(clienteRequest.getEnderecos());
-//        cliente.setDataNascimento(clienteRequest.getDataNascimento());
-//
-//        return cliente;
-//
-//    }
+    @Transactional
+    public ClienteResponse atualizar(Long id, ClienteAtualizarRequest clienteAtualizarRequest) {
+
+        Cliente cliente = buscar(id);
+
+        cliente.setNome(clienteAtualizarRequest.getNome());
+        cliente.setSobrenome(clienteAtualizarRequest.getSobrenome());
+        cliente.setEmail(clienteAtualizarRequest.getEmail());
+
+        ClienteResponse clienteResponse = new ClienteResponse();
+        return clienteResponse.converterParaEntidade(cliente);
+
+    }
 
     public void deletar(Long id) {
         repository.deleteById(id);

@@ -4,10 +4,12 @@ import io.github.Marcky404.Biblioteca.domain.Cliente;
 import io.github.Marcky404.Biblioteca.domain.Endereco;
 import io.github.Marcky404.Biblioteca.domain.Telefone;
 import io.github.Marcky404.Biblioteca.domain.enums.Sexo;
+import io.github.Marcky404.Biblioteca.domain.enums.Status;
 import io.github.Marcky404.Biblioteca.utils.Utils;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -31,6 +33,10 @@ public class ClienteRequest {
     private String sobrenome;
     @CPF
     private String cpf;
+    private Status status;
+    @NotNull
+    @Pattern(regexp = "^[\\w\\-]+(\\.[\\w\\-]+)*@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}$", message="E-mail com formato incorreto.")
+    private String email;
     private Sexo sexo;
     private LocalDate dataNascimento;
     @NotNull(message = "Campo telephones não pode estar vazio")
@@ -46,7 +52,7 @@ public class ClienteRequest {
     public Cliente converterParaEntidade() {
         List<Telefone> telefones = converterParaLista(this.telefones);
         List<Endereco> enderecos = converterEnderecoParaParaLista(this.enderecos);
-        return new Cliente(nome, sobrenome, cpf, sexo, dataNascimento, telefones, enderecos);
+        return new Cliente(nome, sobrenome, cpf, status, email, sexo, dataNascimento, telefones, enderecos);
     }
 
     public void setNome(String nome) {
