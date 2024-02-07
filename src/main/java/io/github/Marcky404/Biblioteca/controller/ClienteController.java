@@ -1,15 +1,14 @@
 package io.github.Marcky404.Biblioteca.controller;
 
 import io.github.Marcky404.Biblioteca.domain.Cliente;
+import io.github.Marcky404.Biblioteca.domain.request.ClienteAtualizarRequest;
 import io.github.Marcky404.Biblioteca.domain.request.ClienteRequest;
+import io.github.Marcky404.Biblioteca.domain.response.ClienteResponse;
 import io.github.Marcky404.Biblioteca.service.ClienteService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
@@ -23,14 +22,20 @@ public class ClienteController {
 
 
     @PostMapping
-    public ResponseEntity salvar(@RequestBody @Valid ClienteRequest clienteRequest){
-        Cliente cliente =service.salvar(clienteRequest);
+    public ResponseEntity salvar(@RequestBody @Valid ClienteRequest clienteRequest) {
+        Cliente cliente = service.salvar(clienteRequest);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
                 .buildAndExpand(cliente.getId())
                 .toUri();
         return ResponseEntity.created(location).build();
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ClienteResponse> atualizar(@PathVariable("id") Long id, @RequestBody @Valid ClienteAtualizarRequest clienteAtualizarRequest) {
+    return ResponseEntity.ok(service.atualizar(id, clienteAtualizarRequest));
+
     }
 
 }
