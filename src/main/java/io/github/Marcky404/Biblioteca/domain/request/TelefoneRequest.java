@@ -23,6 +23,12 @@ public class TelefoneRequest {
     private String numero;
     private TipoTelefone tipoTelefone;
 
+    public TelefoneRequest(Telefone telefone) {
+        this.ddd = telefone.getDdd();
+        this.numero = telefone.getNumero();
+        this.tipoTelefone = telefone.getTipoTelefone();
+    }
+
     public Telefone converterParaEntidade(){
         return new Telefone(ddd,numero,tipoTelefone);
     }
@@ -33,4 +39,6 @@ public class TelefoneRequest {
     public void setDdd(Integer ddd) {
         this.ddd = Utils.validarDdd(ddd);
     }
+
+
 }
