@@ -9,7 +9,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -29,9 +28,6 @@ public class TelefoneRequest {
         this.tipoTelefone = telefone.getTipoTelefone();
     }
 
-    public Telefone converterParaEntidade(){
-        return new Telefone(ddd,numero,tipoTelefone);
-    }
 
     public static List<Telefone> converterParaLista(List<TelefoneRequest> telefoneRequestList){
         return telefoneRequestList.stream().map(t -> new Telefone(t.ddd,t.numero,t.tipoTelefone)).toList();
