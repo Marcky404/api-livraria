@@ -22,5 +22,6 @@ public interface LivroRepository extends JpaRepository<Livro, Long> {
             "LivroQuantidadeTotalGenero(count(*) as quantidade, sum(l.valor)  " +
             "as total, l.genero) from Livro l GROUP BY l.genero")
     List<LivroQuantidadeTotalGenero> findByLivroQuantidadeTotalGenero();
-    
+
+
 }
