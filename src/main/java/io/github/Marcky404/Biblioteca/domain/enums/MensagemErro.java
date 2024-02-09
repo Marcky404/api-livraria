@@ -9,6 +9,7 @@ public enum MensagemErro {
     DDD_INVALIDO("DDD informado invalido!", HttpStatus.BAD_REQUEST),
     ILLEGAL_ARGUMENT_EXCEPTION("Argumento informado não é válido.", HttpStatus.BAD_REQUEST),
     LIVRO_NAO_ENCONTRADO("Livro não encontrado", HttpStatus.NOT_FOUND),
+    ENDERECO_NAO_ENCONTRADO("Endereco não encontrado", HttpStatus.NOT_FOUND),
     CLIENTE_NAO_ENCONTRADO("Cliente não encontrado", HttpStatus.NOT_FOUND),
     TELEFONE_NAO_ENCONTRADO("Telefone não encontrado", HttpStatus.NOT_FOUND),
     GENERO_NAO_ENCONTRADO("Gênero não encontrado", HttpStatus.NOT_FOUND),
