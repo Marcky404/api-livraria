@@ -25,7 +25,7 @@ public class EnderecoService {
         return repository.findById(id).orElseThrow(MensagemErro.ENDERECO_NAO_ENCONTRADO::asBusinessException);
     }
 
-    public Endereco buscarEndereço(String cep) {
+    public Endereco buscarEndereco(String cep) {
         return restTemplate.getForObject(endpoint + cep + "/json", Endereco.class);
     }
 
@@ -52,7 +52,7 @@ public class EnderecoService {
 
 
     public EnderecoRequest construirEndereco(EnderecoRequest enderecoRequest) {
-        Endereco enderecoViaCep = buscarEndereço(enderecoRequest.getCep());
+        Endereco enderecoViaCep = buscarEndereco(enderecoRequest.getCep());
 
         enderecoRequest.setCep(enderecoViaCep.getCep());
         enderecoRequest.setUf(enderecoViaCep.getUf());
