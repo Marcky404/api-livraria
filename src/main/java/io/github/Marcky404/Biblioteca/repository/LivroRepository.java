@@ -22,7 +22,6 @@ public interface LivroRepository extends JpaRepository<Livro, Long> {
             "as total, l.genero) from Livro l GROUP BY l.genero")
     List<LivroQuantidadeTotalGenero> findByLivroQuantidadeTotalGenero();
 
-    default void imprimirLivro(){
-        System.out.println();
-    }
+
+
 }
