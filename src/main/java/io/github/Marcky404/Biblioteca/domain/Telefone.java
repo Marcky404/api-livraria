@@ -1,13 +1,14 @@
 package io.github.Marcky404.Biblioteca.domain;
 
 import io.github.Marcky404.Biblioteca.domain.enums.TipoTelefone;
-import io.github.Marcky404.Biblioteca.utils.Utils;
+import io.github.Marcky404.Biblioteca.domain.request.TelefoneRequest;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
 @NoArgsConstructor
@@ -30,4 +31,6 @@ public class Telefone {
         this.numero = numero;
         this.tipoTelefone = tipoTelefone;
     }
+
+
 }

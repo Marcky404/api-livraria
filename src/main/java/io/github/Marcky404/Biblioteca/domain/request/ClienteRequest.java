@@ -35,7 +35,7 @@ public class ClienteRequest {
     private String cpf;
     private Status status;
     @NotNull
-    @Pattern(regexp = "^[\\w\\-]+(\\.[\\w\\-]+)*@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}$", message="E-mail com formato incorreto.")
+    @Pattern(regexp = "^[\\w\\-]+(\\.[\\w\\-]+)*@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}$", message = "E-mail com formato incorreto.")
     private String email;
     private Sexo sexo;
     private LocalDate dataNascimento;

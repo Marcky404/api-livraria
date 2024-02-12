@@ -19,4 +19,10 @@ public class TelefoneController {
         return ResponseEntity.ok(service.atualizar(id, telefoneRequest));
 
     }
+
+    @DeleteMapping("/{telefoneId}/{clienteId}")
+    public ResponseEntity deletar(@PathVariable("telefoneId") Long telefoneId,@PathVariable("clienteId") Long clienteId ){
+        service.deletar(telefoneId, clienteId);
+        return ResponseEntity.noContent().build();
+    }
 }

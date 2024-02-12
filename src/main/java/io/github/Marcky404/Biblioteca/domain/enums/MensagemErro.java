@@ -13,6 +13,7 @@ public enum MensagemErro {
     CLIENTE_NAO_ENCONTRADO("Cliente não encontrado", HttpStatus.NOT_FOUND),
     TELEFONE_NAO_ENCONTRADO("Telefone não encontrado", HttpStatus.NOT_FOUND),
     GENERO_NAO_ENCONTRADO("Gênero não encontrado", HttpStatus.NOT_FOUND),
+    TELEFONE_NAO_DELETADO("O telefone não pode ser deletado, pois há somente um contato disponível", HttpStatus.NOT_FOUND),
 
     HTTP_MEDIA_TYPE_NOT_SUPPORTED_EXCEPTION("Media type informado não é suportado", HttpStatus.BAD_REQUEST),
     HTTP_REQUEST_METHOD_NOT_SUPPORTED_EXCEPTION("Metodo HTTP não suportado", HttpStatus.BAD_REQUEST);

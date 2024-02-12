@@ -1,10 +1,16 @@
 package io.github.Marcky404.Biblioteca.domain;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
+import io.github.Marcky404.Biblioteca.domain.request.EnderecoRequest;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -35,4 +41,6 @@ public class Endereco {
         this.uf = uf;
         this.destinatario = destinatario;
     }
+
+
 }

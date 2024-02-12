@@ -3,10 +3,12 @@ package io.github.Marcky404.Biblioteca.domain;
 
 import io.github.Marcky404.Biblioteca.domain.enums.Sexo;
 import io.github.Marcky404.Biblioteca.domain.enums.Status;
+import io.github.Marcky404.Biblioteca.domain.request.ClienteRequest;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import java.time.LocalDate;
 import java.util.List;
 
@@ -49,4 +51,6 @@ public class Cliente {
         this.telefones = telefones;
         this.enderecos = enderecos;
     }
+
+
 }
