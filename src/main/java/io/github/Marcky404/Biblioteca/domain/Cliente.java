@@ -3,7 +3,6 @@ package io.github.Marcky404.Biblioteca.domain;
 
 import io.github.Marcky404.Biblioteca.domain.enums.Sexo;
 import io.github.Marcky404.Biblioteca.domain.enums.Status;
-import io.github.Marcky404.Biblioteca.domain.request.ClienteRequest;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
