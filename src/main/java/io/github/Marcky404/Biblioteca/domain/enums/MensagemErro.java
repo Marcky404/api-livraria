@@ -11,7 +11,7 @@ public enum MensagemErro {
     LIVRO_NAO_ENCONTRADO("Livro não encontrado", HttpStatus.NOT_FOUND),
     ENDERECO_NAO_ENCONTRADO("Endereco não encontrado", HttpStatus.NOT_FOUND),
     CLIENTE_NAO_ENCONTRADO("Cliente não encontrado", HttpStatus.NOT_FOUND),
-    TELEFONE_NAO_ENCONTRADO("Telefone não encontrado", HttpStatus.NOT_FOUND),
+    TELEFONE_NAO_ENCONTRADO("Telefone não encontrado", HttpStatus.CONFLICT),
     GENERO_NAO_ENCONTRADO("Gênero não encontrado", HttpStatus.NOT_FOUND),
     TELEFONE_NAO_DELETADO("O telefone não pode ser deletado, pois há somente um contato disponível", HttpStatus.NOT_FOUND),
 

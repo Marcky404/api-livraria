@@ -7,7 +7,6 @@ import io.github.Marcky404.Biblioteca.domain.request.ClienteAtualizarRequest;
 import io.github.Marcky404.Biblioteca.domain.request.ClienteRequest;
 import io.github.Marcky404.Biblioteca.domain.request.EnderecoRequest;
 import io.github.Marcky404.Biblioteca.domain.request.TelefoneRequest;
-import io.github.Marcky404.Biblioteca.domain.response.ClienteDesativarResponse;
 import io.github.Marcky404.Biblioteca.domain.response.ClienteResponse;
 import io.github.Marcky404.Biblioteca.repository.ClienteRepository;
 import io.github.Marcky404.Biblioteca.utils.Utils;
@@ -89,10 +88,10 @@ public class ClienteService {
 
 
     @Transactional
-    public ClienteDesativarResponse desativarCliente(ClienteDesativarResponse clienteDesativarResponse) {
-        Cliente cliente = buscar(clienteDesativarResponse.getId());
-        cliente.setStatus(clienteDesativarResponse.getStatus());
+    public ClienteResponse desativarCliente(ClienteResponse ClienteResponse) {
+        Cliente cliente = buscar(ClienteResponse.getId());
+        cliente.setStatus(ClienteResponse.getStatus());
 
-        return new ClienteDesativarResponse(cliente);
+        return new ClienteResponse(cliente);
     }
 }

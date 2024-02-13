@@ -4,6 +4,7 @@ import io.github.Marcky404.Biblioteca.domain.Cliente;
 import io.github.Marcky404.Biblioteca.domain.Telefone;
 import io.github.Marcky404.Biblioteca.domain.enums.MensagemErro;
 import io.github.Marcky404.Biblioteca.domain.request.TelefoneRequest;
+import io.github.Marcky404.Biblioteca.repository.ClienteRepository;
 import io.github.Marcky404.Biblioteca.repository.TelefoneRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,7 @@ public class TelefoneService {
 
     public final TelefoneRepository repository;
     public final ClienteService clienteService;
+    public final ClienteRepository clienteRepository;
 
 
     public Telefone buscar(Long id) {
@@ -36,15 +38,13 @@ public class TelefoneService {
 
     public void deletar(Long telefoneId, Long clienteId) {
         Cliente cliente = clienteService.buscar(clienteId);
-        Telefone telefoneParaExcluir = new Telefone();
+
         if (cliente.getTelefones().size() == 1) {
             throw MensagemErro.TELEFONE_NAO_DELETADO.asBusinessException();
         } else {
-
-            cliente.getTelefones().removeIf(t -> t.getId().equals(telefoneId));
-            cliente.getTelefones().remove(telefoneParaExcluir);
-
-            clienteService.salvarAEntidadeCliente(cliente);
+            Telefone telefone = buscar(telefoneId);
+            cliente.getTelefones().remove(telefone);
+            clienteRepository.save(cliente);
         }
 
     }

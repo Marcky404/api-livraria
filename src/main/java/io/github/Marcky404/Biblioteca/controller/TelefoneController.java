@@ -20,7 +20,7 @@ public class TelefoneController {
 
     }
 
-    @DeleteMapping("/{telefoneId}/{clienteId}")
+    @DeleteMapping( "/{telefoneId}/cliente/{clienteId}")
     public ResponseEntity deletar(@PathVariable("telefoneId") Long telefoneId,@PathVariable("clienteId") Long clienteId ){
         service.deletar(telefoneId, clienteId);
         return ResponseEntity.noContent().build();
