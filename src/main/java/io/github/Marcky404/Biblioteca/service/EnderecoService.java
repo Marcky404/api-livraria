@@ -1,8 +1,11 @@
 package io.github.Marcky404.Biblioteca.service;
 
+import io.github.Marcky404.Biblioteca.domain.Cliente;
 import io.github.Marcky404.Biblioteca.domain.Endereco;
+import io.github.Marcky404.Biblioteca.domain.Telefone;
 import io.github.Marcky404.Biblioteca.domain.enums.MensagemErro;
 import io.github.Marcky404.Biblioteca.domain.request.EnderecoRequest;
+import io.github.Marcky404.Biblioteca.repository.ClienteRepository;
 import io.github.Marcky404.Biblioteca.repository.EnderecoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,6 +21,7 @@ public class EnderecoService {
     @Value("${endpoint.cep}")
     private String endpoint;
     private final EnderecoRepository repository;
+    private final ClienteRepository clienteRepository;
 
     private RestTemplate restTemplate = new RestTemplate();
 
@@ -61,5 +65,18 @@ public class EnderecoService {
         enderecoRequest.setLocalidade(enderecoViaCep.getLocalidade());
 
         return enderecoRequest;
+    }
+
+    public void deletar(Long enderecoId, Long clienteId) {
+        Cliente cliente = clienteRepository.findById(clienteId).orElseThrow(MensagemErro.CLIENTE_NAO_ENCONTRADO::asBusinessException);
+
+        if (cliente.getEnderecos().size() == 1) {
+            throw MensagemErro.ENDERECO_NAO_DELETADO.asBusinessException();
+        }
+        Endereco endereco = buscar(enderecoId);
+        cliente.getEnderecos().remove(endereco);
+        clienteRepository.save(cliente);
+
+
     }
 }
