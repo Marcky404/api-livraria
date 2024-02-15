@@ -2,7 +2,6 @@ package io.github.Marcky404.Biblioteca.service;
 
 import io.github.Marcky404.Biblioteca.domain.Cliente;
 import io.github.Marcky404.Biblioteca.domain.Endereco;
-import io.github.Marcky404.Biblioteca.domain.Telefone;
 import io.github.Marcky404.Biblioteca.domain.enums.MensagemErro;
 import io.github.Marcky404.Biblioteca.domain.request.EnderecoRequest;
 import io.github.Marcky404.Biblioteca.repository.ClienteRepository;
