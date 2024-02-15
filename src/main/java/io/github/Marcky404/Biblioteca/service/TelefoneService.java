@@ -41,11 +41,11 @@ public class TelefoneService {
 
         if (cliente.getTelefones().size() == 1) {
             throw MensagemErro.TELEFONE_NAO_DELETADO.asBusinessException();
-        } else {
-            Telefone telefone = buscar(telefoneId);
-            cliente.getTelefones().remove(telefone);
-            clienteRepository.save(cliente);
         }
+        Telefone telefone = buscar(telefoneId);
+        cliente.getTelefones().remove(telefone);
+        clienteRepository.save(cliente);
+
 
     }
 }

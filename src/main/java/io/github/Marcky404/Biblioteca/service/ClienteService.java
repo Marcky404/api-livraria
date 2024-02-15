@@ -35,9 +35,6 @@ public class ClienteService {
         return repository.save(cliente);
     }
 
-    public void salvarAEntidadeCliente(Cliente cliente){
-        repository.save(cliente);
-    }
 
     private TelefoneRequest construirTelefone(TelefoneRequest telefoneRequest) {
         TelefoneRequest tel = new TelefoneRequest();
