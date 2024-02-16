@@ -1,6 +1,7 @@
 package io.github.Marcky404.Biblioteca.controller;
 
 import io.github.Marcky404.Biblioteca.domain.Cliente;
+import io.github.Marcky404.Biblioteca.domain.enums.Status;
 import io.github.Marcky404.Biblioteca.domain.request.ClienteAtualizarRequest;
 import io.github.Marcky404.Biblioteca.domain.request.ClienteRequest;
 import io.github.Marcky404.Biblioteca.domain.response.ClienteResponse;
@@ -34,18 +35,18 @@ public class ClienteController {
 
     @PutMapping("/{id}")
     public ResponseEntity<ClienteResponse> atualizar(@PathVariable("id") Long id, @RequestBody @Valid ClienteAtualizarRequest clienteAtualizarRequest) {
-    return ResponseEntity.ok(service.atualizar(id, clienteAtualizarRequest));
+        return ResponseEntity.ok(service.atualizar(id, clienteAtualizarRequest));
 
     }
 
 
-    @PutMapping("/desativar")
-    public ResponseEntity<ClienteResponse> desativarCliente(@RequestBody @Valid ClienteResponse clienteResponse){
-        return ResponseEntity.ok(service.desativarCliente(clienteResponse));
+    @PutMapping("/{id}/desativar")
+    public ResponseEntity<ClienteResponse> desativarCliente(@PathVariable("id") Long id, @RequestParam("status") Status status) {
+        return ResponseEntity.ok(service.desativarCliente(id, status));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity deletar(@PathVariable("id") Long id){
+    public ResponseEntity deletar(@PathVariable("id") Long id) {
         service.deletar(id);
         return ResponseEntity.noContent().build();
     }
