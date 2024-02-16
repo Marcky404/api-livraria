@@ -16,9 +16,16 @@ public class EnderecoController {
 
 
 
-    @PutMapping("{/id}")
+
+    @PutMapping("/{id}")
     public ResponseEntity<EnderecoRequest> atualizar(@PathVariable("id") Long id, @RequestBody @Valid EnderecoRequest enderecoRequest) {
         return ResponseEntity.ok(service.atualizar(id, enderecoRequest));
+    }
+
+    @DeleteMapping("/{enderecoId}/cliente/{clienteId}")
+    public ResponseEntity deletar(@PathVariable("enderecoId") Long enderecoId,@PathVariable("clienteId") Long clienteId){
+        service.deletar(enderecoId, clienteId);
+        return ResponseEntity.noContent().build();
     }
 
 }

@@ -3,6 +3,7 @@ package io.github.Marcky404.Biblioteca.service;
 import io.github.Marcky404.Biblioteca.domain.Cliente;
 import io.github.Marcky404.Biblioteca.domain.Endereco;
 import io.github.Marcky404.Biblioteca.domain.enums.MensagemErro;
+import io.github.Marcky404.Biblioteca.domain.enums.Status;
 import io.github.Marcky404.Biblioteca.domain.request.ClienteAtualizarRequest;
 import io.github.Marcky404.Biblioteca.domain.request.ClienteRequest;
 import io.github.Marcky404.Biblioteca.domain.request.EnderecoRequest;
@@ -34,6 +35,7 @@ public class ClienteService {
         Cliente cliente = clienteRequest.converterParaEntidade();
         return repository.save(cliente);
     }
+
 
     private TelefoneRequest construirTelefone(TelefoneRequest telefoneRequest) {
         TelefoneRequest tel = new TelefoneRequest();
@@ -80,5 +82,14 @@ public class ClienteService {
 
     public void deletar(Long id) {
         repository.deleteById(id);
+    }
+
+
+    @Transactional
+    public ClienteResponse desativarCliente(Long id, Status status) {
+        Cliente cliente = buscar(id);
+        cliente.setStatus(status);
+
+        return new ClienteResponse(cliente);
     }
 }

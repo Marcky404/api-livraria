@@ -14,6 +14,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class ClienteResponse {
 
+    private Long id;
     private String nome;
     private String sobrenome;
     private String cpf;
