@@ -18,12 +18,12 @@ import java.util.List;
 public class TelefoneRequest {
 
     @NotNull(message = "O DDD não pode ser nulo")
-    @Schema(title = "DDD", required = true, example = "11", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = "DDD", example = "11", requiredMode = Schema.RequiredMode.REQUIRED)
     private Integer ddd;
     @NotBlank(message = "Campo NÚMERO não pode ser vazio ou nulo")
-    @Schema(title = "Número", required = true, example = "999999999", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = "Número", example = "999999999", requiredMode = Schema.RequiredMode.REQUIRED)
     private String numero;
-    @Schema(title = "Tipo de Telefone", required = true, example = "CELULAR", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = "Tipo de Telefone", example = "CELULAR", requiredMode = Schema.RequiredMode.REQUIRED)
     private TipoTelefone tipoTelefone;
 
     public TelefoneRequest(Telefone telefone) {

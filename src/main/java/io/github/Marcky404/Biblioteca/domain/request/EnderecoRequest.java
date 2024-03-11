@@ -16,10 +16,10 @@ import java.util.List;
 public class EnderecoRequest {
 
     @NotBlank(message = "O campo cep não pode ser vazio ou nulo!")
-    @Schema(title = "CEP", required = true, example = "40285-001", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = "CEP", example = "40285-001", requiredMode = Schema.RequiredMode.REQUIRED)
     private String cep;
     @NotNull(message = "O campo número não pode ser vazio ou nulo!")
-    @Schema(title = "Número", required = true, example = "123", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = "Número", example = "123", requiredMode = Schema.RequiredMode.REQUIRED)
     private Integer numero;
     @Schema(title = "Logradouro", example = "Dr.João Freitas", requiredMode = Schema.RequiredMode.REQUIRED)
     private String logradouro;
@@ -32,7 +32,7 @@ public class EnderecoRequest {
     @Schema(title = "UF", example = "BA")
     private String uf;
     @NotBlank(message = "O campo destinatario não pode ser vazio ou nulo!")
-    @Schema(title = "Destinatário", required = true, example = "João Silva", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title = "Destinatário", example = "João Silva", requiredMode = Schema.RequiredMode.REQUIRED)
     private String destinatario;
 
     public EnderecoRequest(Endereco endereco) {
