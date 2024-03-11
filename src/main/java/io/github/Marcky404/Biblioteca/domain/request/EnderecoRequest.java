@@ -1,7 +1,9 @@
 package io.github.Marcky404.Biblioteca.domain.request;
 
 import io.github.Marcky404.Biblioteca.domain.Endereco;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,14 +16,23 @@ import java.util.List;
 public class EnderecoRequest {
 
     @NotBlank(message = "O campo cep não pode ser vazio ou nulo!")
+    @Schema(title = "CEP", required = true, example = "40285-001", requiredMode = Schema.RequiredMode.REQUIRED)
     private String cep;
+    @NotNull(message = "O campo número não pode ser vazio ou nulo!")
+    @Schema(title = "Número", required = true, example = "123", requiredMode = Schema.RequiredMode.REQUIRED)
     private Integer numero;
+    @Schema(title = "Logradouro", example = "Dr.João Freitas", requiredMode = Schema.RequiredMode.REQUIRED)
     private String logradouro;
+    @Schema(title = "Complemento", example = "Apartamento 101")
     private String complemento;
+    @Schema(title = "Bairro", example = "Brotas")
     private String bairro;
+    @Schema(title = "Localidade", example = "Salvador")
     private String localidade;
+    @Schema(title = "UF", example = "BA")
     private String uf;
     @NotBlank(message = "O campo destinatario não pode ser vazio ou nulo!")
+    @Schema(title = "Destinatário", required = true, example = "João Silva", requiredMode = Schema.RequiredMode.REQUIRED)
     private String destinatario;
 
     public EnderecoRequest(Endereco endereco) {
