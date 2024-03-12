@@ -6,6 +6,7 @@ import io.github.Marcky404.Biblioteca.domain.Telefone;
 import io.github.Marcky404.Biblioteca.domain.enums.Sexo;
 import io.github.Marcky404.Biblioteca.domain.enums.Status;
 import io.github.Marcky404.Biblioteca.utils.Utils;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -28,24 +29,33 @@ import static io.github.Marcky404.Biblioteca.domain.request.TelefoneRequest.conv
 public class ClienteRequest {
 
     @NotBlank(message = "Campo NOME não pode ser vazio ou nulo")
+    @Schema(title = "Nome do cliente", example = "João", requiredMode = Schema.RequiredMode.REQUIRED)
     private String nome;
     @NotBlank(message = "Campo SOBRENOME não pode ser vazio ou nulo")
+    @Schema(title = "Sobrenome do cliente", example = "Da Silva", requiredMode = Schema.RequiredMode.REQUIRED)
     private String sobrenome;
     @CPF
+    @Schema(title = "CPF do cliente", example = "123.456.789-00", requiredMode = Schema.RequiredMode.REQUIRED)
     private String cpf;
+    @Schema(title = "Status do cliente", example = "ATIVO", requiredMode = Schema.RequiredMode.REQUIRED)
     private Status status;
     @NotNull
     @Pattern(regexp = "^[\\w\\-]+(\\.[\\w\\-]+)*@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}$", message = "E-mail com formato incorreto.")
+    @Schema(title = "E-mail do cliente", example = "joao@email.com", requiredMode = Schema.RequiredMode.REQUIRED)
     private String email;
+    @Schema(title = "Sexo do cliente", example = "MASCULINO", requiredMode = Schema.RequiredMode.REQUIRED)
     private Sexo sexo;
+    @Schema(title = "Data de nascimento do cliente", example = "2000-10-08", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDate dataNascimento;
     @NotNull(message = "Campo telephones não pode estar vazio")
     @Size(min = 1, max = 3, message = "Campo Telefone deve conter 1 até 3 telefones")
     @Valid
+    @Schema(title = "Telefones do cliente", requiredMode = Schema.RequiredMode.REQUIRED)
     private List<TelefoneRequest> telefones;
     @NotNull(message = "Campo endereco não pode estar vazio")
     @Size(min = 1, max = 3, message = "Campo endereço deve conter 1 até 3 enderecos")
     @Valid
+    @Schema(title = "Enderecos do cliente", requiredMode = Schema.RequiredMode.REQUIRED)
     private List<EnderecoRequest> enderecos;
 
 
