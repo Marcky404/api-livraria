@@ -32,7 +32,7 @@ public class ClienteController {
     @Operation(summary = "Criar Cliente", description = "Endpoint para criar um novo cliente.")
     @ApiResponse(responseCode = "201", description = "Cliente criado com sucesso")
     @PostMapping
-    public ResponseEntity salvar(@RequestBody @Valid ClienteRequest clienteRequest) {
+    public ResponseEntity<Void> salvar(@RequestBody @Valid ClienteRequest clienteRequest) {
         Cliente cliente = service.salvar(clienteRequest);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
@@ -94,7 +94,7 @@ public class ClienteController {
             @ApiResponse(responseCode = "500", description = "Sistema Indisponível")
     })
     @DeleteMapping("/{id}")
-    public ResponseEntity deletar(@PathVariable("id") Long id) {
+    public ResponseEntity<Void> deletar(@PathVariable("id") Long id) {
         service.deletar(id);
         return ResponseEntity.noContent().build();
     }

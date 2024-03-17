@@ -46,7 +46,7 @@ public class EnderecoController {
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = BusinessException.BusinessExceptionBody.class)))
     })
     @DeleteMapping("/{enderecoId}/cliente/{clienteId}")
-    public ResponseEntity deletar(@PathVariable("enderecoId") Long enderecoId, @PathVariable("clienteId") Long clienteId) {
+    public ResponseEntity<Void> deletar(@PathVariable("enderecoId") Long enderecoId, @PathVariable("clienteId") Long clienteId) {
         service.deletar(enderecoId, clienteId);
         return ResponseEntity.noContent().build();
     }

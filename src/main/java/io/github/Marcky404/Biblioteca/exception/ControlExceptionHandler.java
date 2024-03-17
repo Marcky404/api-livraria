@@ -123,7 +123,7 @@ public class ControlExceptionHandler {
 
         List<String> fieldErrorDtos = fieldErrors.stream()
                 .map(f -> "{'".concat(f.getField()).concat("':'").concat(f.getDefaultMessage()).concat("'}")).map(String::new)
-                .collect(Collectors.toList());
+                .toList();
 
         BusinessException ex = BusinessException.builder()
                 .httpStatusCode(HttpStatus.BAD_REQUEST)

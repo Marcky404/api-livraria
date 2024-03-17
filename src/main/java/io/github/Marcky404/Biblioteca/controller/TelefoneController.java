@@ -45,7 +45,7 @@ public class TelefoneController {
             @ApiResponse(responseCode = "500", description = "Sistema Indisponível")
     })
     @DeleteMapping( "/{telefoneId}/cliente/{clienteId}")
-    public ResponseEntity deletar(@PathVariable("telefoneId") Long telefoneId,@PathVariable("clienteId") Long clienteId ){
+    public ResponseEntity<Void> deletar(@PathVariable("telefoneId") Long telefoneId,@PathVariable("clienteId") Long clienteId ){
         service.deletar(telefoneId, clienteId);
         return ResponseEntity.noContent().build();
     }

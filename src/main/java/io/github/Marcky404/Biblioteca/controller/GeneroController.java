@@ -29,7 +29,7 @@ public class GeneroController {
     @Operation(summary = "Criar Genero", description = "Endpoint para criar um novo genero.")
     @ApiResponse(responseCode = "201", description = "Genero criado com sucesso")
     @PostMapping
-    public ResponseEntity salvar(@RequestBody Genero genero) {
+    public ResponseEntity<Void> salvar(@RequestBody Genero genero) {
         service.salvar(genero);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
@@ -92,7 +92,7 @@ public class GeneroController {
             @ApiResponse(responseCode = "500", description = "Sistema Indisponível")
     })
     @DeleteMapping("/{id}")
-    public ResponseEntity deletar(@PathVariable("id") Long id) {
+    public ResponseEntity<Void> deletar(@PathVariable("id") Long id) {
         service.deletar(id);
         return ResponseEntity.noContent().build();
     }

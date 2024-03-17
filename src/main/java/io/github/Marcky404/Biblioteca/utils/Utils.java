@@ -6,6 +6,8 @@ import io.github.Marcky404.Biblioteca.domain.enums.TipoTelefone;
 import java.util.Arrays;
 
 public class Utils {
+
+    private Utils(){}
     public static String mascararCpf(String cpf) {
 
         String cpfFormatado = cpf.replaceAll("[^0-9]", "");
