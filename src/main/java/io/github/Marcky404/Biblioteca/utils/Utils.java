@@ -10,14 +10,14 @@ public class Utils {
     private Utils(){}
     public static String mascararCpf(String cpf) {
 
-        String cpfFormatado = cpf.replaceAll("[^0-9]", "");
+        String cpfFormatado = cpf.replaceAll("\\D", "");
 
         StringBuilder sb = new StringBuilder();
 
-        sb.append(cpfFormatado.substring(0, 3)).append(".");
-        sb.append(cpfFormatado.substring(3, 6)).append(".");
-        sb.append(cpfFormatado.substring(6, 9)).append("-");
-        sb.append(cpfFormatado.substring(9, 11));
+        sb.append(cpfFormatado, 0, 3).append(".");
+        sb.append(cpfFormatado, 3, 6).append(".");
+        sb.append(cpfFormatado, 6, 9).append("-");
+        sb.append(cpfFormatado, 9, 11);
 
         return sb.toString();
     }
