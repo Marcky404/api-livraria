@@ -21,7 +21,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/genero")
-@Tag(name = "Genero", description = "Endpoints responsáveeis por gerenciar generos")
+@Tag(name = "Genero", description = "Endpoints responsáveis por gerenciar generos")
 public class GeneroController {
 
     private final GeneroService service;
