@@ -1,0 +1,11 @@
+{
+  "id": 1,
+  "cep": "40285-001",
+  "numero": 123,
+  "logradouro": "Dr.João Freitas",
+  "complemento": "Apartamento 101",
+  "bairro": "Brotas",
+  "localidade": "Salvador",
+  "uf": "BA",
+  "destinatario": "João Silva"
+}
