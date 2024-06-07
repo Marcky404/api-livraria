@@ -35,16 +35,6 @@ public class EnderecoRequest {
     @Schema(title = "Destinatário", example = "João Silva", requiredMode = Schema.RequiredMode.REQUIRED)
     private String destinatario;
 
-    public EnderecoRequest(Endereco endereco) {
-        this.cep = endereco.getCep();
-        this.numero = endereco.getNumero();
-        this.logradouro = endereco.getLogradouro();
-        this.complemento = endereco.getComplemento();
-        this.bairro = endereco.getBairro();
-        this.localidade = endereco.getLocalidade();
-        this.uf = endereco.getUf();
-        this.destinatario = endereco.getDestinatario();
-    }
 
     public static List<Endereco> converterEnderecoParaParaLista(List<EnderecoRequest> enderecoRequestList) {
         return enderecoRequestList.stream().map(e -> new Endereco(e.cep, e.numero, e.logradouro, e.complemento, e.bairro, e.localidade, e.uf, e.destinatario)).toList();

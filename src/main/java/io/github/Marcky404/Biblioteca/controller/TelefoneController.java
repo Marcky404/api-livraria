@@ -1,6 +1,7 @@
 package io.github.Marcky404.Biblioteca.controller;
 
 import io.github.Marcky404.Biblioteca.domain.request.TelefoneRequest;
+import io.github.Marcky404.Biblioteca.domain.response.TelefoneResponse;
 import io.github.Marcky404.Biblioteca.exception.BusinessException;
 import io.github.Marcky404.Biblioteca.service.TelefoneService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -33,7 +34,7 @@ public class TelefoneController {
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = BusinessException.BusinessExceptionBody.class)))
     })
     @PutMapping("/{id}")
-    public ResponseEntity<TelefoneRequest> atualizar(@PathVariable("id") Long id, @RequestBody @Valid TelefoneRequest telefoneRequest) {
+    public ResponseEntity<TelefoneResponse> atualizar(@PathVariable("id") Long id, @RequestBody @Valid TelefoneRequest telefoneRequest) {
         return ResponseEntity.ok(service.atualizar(id, telefoneRequest));
 
     }

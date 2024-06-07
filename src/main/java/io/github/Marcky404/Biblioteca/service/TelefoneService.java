@@ -4,6 +4,7 @@ import io.github.Marcky404.Biblioteca.domain.Cliente;
 import io.github.Marcky404.Biblioteca.domain.Telefone;
 import io.github.Marcky404.Biblioteca.domain.enums.MensagemErro;
 import io.github.Marcky404.Biblioteca.domain.request.TelefoneRequest;
+import io.github.Marcky404.Biblioteca.domain.response.TelefoneResponse;
 import io.github.Marcky404.Biblioteca.repository.ClienteRepository;
 import io.github.Marcky404.Biblioteca.repository.TelefoneRepository;
 import lombok.RequiredArgsConstructor;
@@ -25,14 +26,14 @@ public class TelefoneService {
 
 
     @Transactional
-    public TelefoneRequest atualizar(Long id, TelefoneRequest telefoneRequest) {
+    public TelefoneResponse atualizar(Long id, TelefoneRequest telefoneRequest) {
         Telefone telefone = buscar(id);
 
         telefone.setDdd(telefoneRequest.getDdd());
         telefone.setNumero(telefoneRequest.getNumero());
         telefone.setTipoTelefone(telefoneRequest.getTipoTelefone());
 
-        return new TelefoneRequest(telefone);
+        return new TelefoneResponse(telefone);
 
     }
 
