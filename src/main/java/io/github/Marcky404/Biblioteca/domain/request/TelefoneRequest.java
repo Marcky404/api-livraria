@@ -26,11 +26,6 @@ public class TelefoneRequest {
     @Schema(title = "Tipo de Telefone", example = "CELULAR", requiredMode = Schema.RequiredMode.REQUIRED)
     private TipoTelefone tipoTelefone;
 
-    public TelefoneRequest(Telefone telefone) {
-        this.ddd = telefone.getDdd();
-        this.numero = telefone.getNumero();
-        this.tipoTelefone = telefone.getTipoTelefone();
-    }
 
     public static List<Telefone> converterParaLista(List<TelefoneRequest> telefoneRequestList){
         return telefoneRequestList.stream().map(t -> new Telefone(t.ddd,t.numero,t.tipoTelefone)).toList();

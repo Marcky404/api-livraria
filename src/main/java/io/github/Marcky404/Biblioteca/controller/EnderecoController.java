@@ -1,6 +1,7 @@
 package io.github.Marcky404.Biblioteca.controller;
 
 import io.github.Marcky404.Biblioteca.domain.request.EnderecoRequest;
+import io.github.Marcky404.Biblioteca.domain.response.EnderecoResponse;
 import io.github.Marcky404.Biblioteca.exception.BusinessException;
 import io.github.Marcky404.Biblioteca.service.EnderecoService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -33,7 +34,7 @@ public class EnderecoController {
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = BusinessException.BusinessExceptionBody.class)))
     })
     @PutMapping("/{id}")
-    public ResponseEntity<EnderecoRequest> atualizar(@PathVariable("id") Long id, @RequestBody @Valid EnderecoRequest enderecoRequest) {
+    public ResponseEntity<EnderecoResponse> atualizar(@PathVariable("id") Long id, @RequestBody @Valid EnderecoRequest enderecoRequest) {
         return ResponseEntity.ok(service.atualizar(id, enderecoRequest));
     }
 
@@ -46,7 +47,7 @@ public class EnderecoController {
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = BusinessException.BusinessExceptionBody.class)))
     })
     @DeleteMapping("/{enderecoId}/cliente/{clienteId}")
-    public ResponseEntity deletar(@PathVariable("enderecoId") Long enderecoId, @PathVariable("clienteId") Long clienteId) {
+    public ResponseEntity<Void> deletar(@PathVariable("enderecoId") Long enderecoId, @PathVariable("clienteId") Long clienteId) {
         service.deletar(enderecoId, clienteId);
         return ResponseEntity.noContent().build();
     }

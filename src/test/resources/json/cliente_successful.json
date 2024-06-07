@@ -1,0 +1,42 @@
+{
+  "id": 1,
+  "nome": "João",
+  "sobrenome": "Da Silva",
+  "cpf": "123.456.789-00",
+  "status": "ATIVO",
+  "email": "joao@email.com",
+  "sexo": "MASCULINO",
+  "dataNascimento": "2000-10-08",
+  "telefones": [
+    {
+      "id": 1,
+      "ddd": 71,
+      "numero": "88888888",
+      "tipoTelefone": "CELULAR"
+    }
+  ],
+  "enderecos": [
+    {
+      "id": 1,
+      "cep": "40285-001",
+      "numero": 123,
+      "logradouro": "Dr.João Freitas",
+      "complemento": "Apartamento 101",
+      "bairro": "Brotas",
+      "localidade": "Salvador",
+      "uf": "BA",
+      "destinatario": "João Silva"
+    },
+    {
+      "id": 2,
+      "cep": "40285-001",
+      "numero": 31,
+      "logradouro": "Dr.João Borjes",
+      "complemento": "Casa",
+      "bairro": "Bosque",
+      "localidade": "Campinas",
+      "uf": "SP",
+      "destinatario": "João Silva"
+    }
+  ]
+}

@@ -17,7 +17,7 @@ public class LivroQuantidadeTotalGenero {
 
     public LivroQuantidadeTotalGenero(Long quantidade, Double total, Genero genero) {
         this.quantidade = quantidade;
-        this.total = new BigDecimal(total).setScale(2, RoundingMode.HALF_UP).doubleValue();
+        this.total = BigDecimal.valueOf(total).setScale(2, RoundingMode.HALF_UP).doubleValue();
         this.genero = genero;
     }
 }

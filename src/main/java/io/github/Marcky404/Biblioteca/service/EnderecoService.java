@@ -4,13 +4,16 @@ import io.github.Marcky404.Biblioteca.domain.Cliente;
 import io.github.Marcky404.Biblioteca.domain.Endereco;
 import io.github.Marcky404.Biblioteca.domain.enums.MensagemErro;
 import io.github.Marcky404.Biblioteca.domain.request.EnderecoRequest;
+import io.github.Marcky404.Biblioteca.domain.response.EnderecoResponse;
 import io.github.Marcky404.Biblioteca.repository.ClienteRepository;
 import io.github.Marcky404.Biblioteca.repository.EnderecoRepository;
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
 @Service
 @RequiredArgsConstructor
@@ -22,19 +25,26 @@ public class EnderecoService {
     private final EnderecoRepository repository;
     private final ClienteRepository clienteRepository;
 
-    private RestTemplate restTemplate = new RestTemplate();
+    private final RestTemplate restTemplate;
 
     public Endereco buscar(Long id) {
         return repository.findById(id).orElseThrow(MensagemErro.ENDERECO_NAO_ENCONTRADO::asBusinessException);
     }
 
     public Endereco buscarEndereco(String cep) {
-        return restTemplate.getForObject(endpoint + cep + "/json", Endereco.class);
+        String uri = getUrlViaCep(cep);
+        return restTemplate.getForObject(uri, Endereco.class);
     }
 
+    @NotNull
+    private String getUrlViaCep(String cep) {
+        return UriComponentsBuilder.fromHttpUrl(endpoint + cep + "/json")
+                .build(false)
+                .toUriString();
+    }
 
     @Transactional
-    public EnderecoRequest atualizar(Long id, EnderecoRequest enderecoRequest) {
+    public EnderecoResponse atualizar(Long id, EnderecoRequest enderecoRequest) {
         Endereco endereco = buscar(id);
 
         if (!endereco.getCep().equals(enderecoRequest.getCep())) {
@@ -46,15 +56,15 @@ public class EnderecoService {
         endereco.setUf(enderecoRequest.getUf());
         endereco.setLocalidade(enderecoRequest.getLocalidade());
         endereco.setBairro(enderecoRequest.getBairro());
-        endereco.setComplemento(enderecoRequest.getComplemento());
+        endereco.setLogradouro(enderecoRequest.getLogradouro());
         endereco.setComplemento(enderecoRequest.getComplemento());
         endereco.setDestinatario(enderecoRequest.getDestinatario());
 
-        return new EnderecoRequest(endereco);
+        return new EnderecoResponse(endereco);
     }
 
 
-    public EnderecoRequest construirEndereco(EnderecoRequest enderecoRequest) {
+    private EnderecoRequest construirEndereco(EnderecoRequest enderecoRequest) {
         Endereco enderecoViaCep = buscarEndereco(enderecoRequest.getCep());
 
         enderecoRequest.setCep(enderecoViaCep.getCep());
@@ -75,7 +85,6 @@ public class EnderecoService {
         Endereco endereco = buscar(enderecoId);
         cliente.getEnderecos().remove(endereco);
         clienteRepository.save(cliente);
-
 
     }
 }

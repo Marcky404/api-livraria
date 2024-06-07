@@ -21,7 +21,6 @@ import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Slf4j
 @RestControllerAdvice
@@ -123,7 +122,7 @@ public class ControlExceptionHandler {
 
         List<String> fieldErrorDtos = fieldErrors.stream()
                 .map(f -> "{'".concat(f.getField()).concat("':'").concat(f.getDefaultMessage()).concat("'}")).map(String::new)
-                .collect(Collectors.toList());
+                .toList();
 
         BusinessException ex = BusinessException.builder()
                 .httpStatusCode(HttpStatus.BAD_REQUEST)

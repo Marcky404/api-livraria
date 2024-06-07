@@ -1,0 +1,11 @@
+{
+  "id": 1,
+  "cep": "40285-001",
+  "numero": 31,
+  "logradouro": "Dr.João Borjes",
+  "complemento": "Casa",
+  "bairro": "Bosque",
+  "localidade": "Campinas",
+  "uf": "SP",
+  "destinatario": "Pedro Henrique"
+}
