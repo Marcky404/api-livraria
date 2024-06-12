@@ -13,6 +13,12 @@
       "ddd": 71,
       "numero": "88888888",
       "tipoTelefone": "CELULAR"
+    },
+    {
+      "id": 2,
+      "ddd": 75,
+      "numero": "81889999",
+      "tipoTelefone": "CELULAR"
     }
   ],
   "enderecos": [
