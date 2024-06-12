@@ -4,6 +4,7 @@ import io.github.Marcky404.Biblioteca.domain.Genero;
 import io.github.Marcky404.Biblioteca.domain.request.GeneroRequest;
 import io.github.Marcky404.Biblioteca.exception.BusinessException;
 import io.github.Marcky404.Biblioteca.repository.GeneroRepository;
+import io.github.Marcky404.Biblioteca.service.GeneroService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

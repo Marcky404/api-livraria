@@ -16,7 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 public class TelefoneService {
 
     public final TelefoneRepository repository;
-    public final ClienteService clienteService;
     public final ClienteRepository clienteRepository;
 
 
@@ -38,7 +37,7 @@ public class TelefoneService {
     }
 
     public void deletar(Long telefoneId, Long clienteId) {
-        Cliente cliente = clienteService.buscar(clienteId);
+        Cliente cliente = clienteRepository.findById(clienteId).orElseThrow(MensagemErro.CLIENTE_NAO_ENCONTRADO::asBusinessException);
 
         if (cliente.getTelefones().size() == 1) {
             throw MensagemErro.TELEFONE_NAO_DELETADO.asBusinessException();

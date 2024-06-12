@@ -1,9 +1,8 @@
-package io.github.Marcky404.Biblioteca.service.controller;
+package io.github.Marcky404.Biblioteca.controller;
 
 import com.fasterxml.jackson.core.json.JsonWriteFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import io.github.Marcky404.Biblioteca.controller.GeneroController;
 import io.github.Marcky404.Biblioteca.domain.Genero;
 import io.github.Marcky404.Biblioteca.domain.request.GeneroRequest;
 import io.github.Marcky404.Biblioteca.service.GeneroService;
