@@ -1,0 +1,15 @@
+{
+  "id": 1,
+  "titulo": "JavaScript",
+  "autor": "Luan Alves",
+  "anoPublicacao": 2014,
+  "isbn": "978-77-355-1234-9",
+  "genero": {
+    "id": 1,
+    "genero": "TECNOLOGIA"
+  },
+  "numeroPaginas": 500,
+  "disponibilidade": "DISPONIVEL",
+  "valor": 40.35,
+  "created": "2024-06-20T21:25:44.659Z"
+}

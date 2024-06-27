@@ -1,10 +1,8 @@
-package io.github.Marcky404.Biblioteca.domain.endereco;
+package io.github.Marcky404.Biblioteca.domain;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.github.Marcky404.Biblioteca.domain.Telefone;
 import io.github.Marcky404.Biblioteca.domain.request.TelefoneRequest;
-
 import java.io.File;
 import java.io.IOException;
 

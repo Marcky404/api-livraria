@@ -46,7 +46,7 @@ public class ClienteService {
         return tel;
     }
 
-    public EnderecoRequest construirEndereco(EnderecoRequest enderecoRequest) {
+    private EnderecoRequest construirEndereco(EnderecoRequest enderecoRequest) {
         Endereco enderecoViaCep = enderecoService.buscarEndereco(enderecoRequest.getCep());
         EnderecoRequest end = new EnderecoRequest();
 

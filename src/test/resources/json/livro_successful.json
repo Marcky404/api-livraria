@@ -1,0 +1,15 @@
+{
+  "id": 1,
+  "titulo": "Quebre a cabeça Java",
+  "autor": "Luan Alves",
+  "anoPublicacao": 2011,
+  "isbn": "978-77-325-1234-8",
+  "genero": {
+    "id": 1,
+    "genero": "DRAMA"
+  },
+  "numeroPaginas": 345,
+  "disponibilidade": "DISPONIVEL",
+  "valor": 34.35,
+  "created": "2024-06-20T21:25:44.659Z"
+}
