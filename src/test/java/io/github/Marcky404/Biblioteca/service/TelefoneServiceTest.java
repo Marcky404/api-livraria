@@ -2,9 +2,9 @@ package io.github.Marcky404.Biblioteca.service;
 
 
 import io.github.Marcky404.Biblioteca.domain.Cliente;
+import io.github.Marcky404.Biblioteca.domain.ClienteMock;
 import io.github.Marcky404.Biblioteca.domain.Telefone;
-import io.github.Marcky404.Biblioteca.domain.endereco.ClienteMock;
-import io.github.Marcky404.Biblioteca.domain.endereco.TelefoneMock;
+import io.github.Marcky404.Biblioteca.domain.TelefoneMock;
 import io.github.Marcky404.Biblioteca.domain.response.TelefoneResponse;
 import io.github.Marcky404.Biblioteca.exception.BusinessException;
 import io.github.Marcky404.Biblioteca.repository.ClienteRepository;
