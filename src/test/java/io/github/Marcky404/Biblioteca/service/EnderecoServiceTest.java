@@ -2,8 +2,8 @@ package io.github.Marcky404.Biblioteca.service;
 
 import io.github.Marcky404.Biblioteca.domain.Cliente;
 import io.github.Marcky404.Biblioteca.domain.Endereco;
-import io.github.Marcky404.Biblioteca.domain.endereco.ClienteMock;
-import io.github.Marcky404.Biblioteca.domain.endereco.EnderecoMock;
+import io.github.Marcky404.Biblioteca.domain.ClienteMock;
+import io.github.Marcky404.Biblioteca.domain.EnderecoMock;
 import io.github.Marcky404.Biblioteca.domain.request.EnderecoRequest;
 import io.github.Marcky404.Biblioteca.domain.response.EnderecoResponse;
 import io.github.Marcky404.Biblioteca.exception.BusinessException;
@@ -140,7 +140,7 @@ public class EnderecoServiceTest {
     }
 
     @Test
-    void deletar_quandoClienteNaoEncontrado_retornaBusinessException(){
+    void deletar_quandoClienteNaoEncontrado_retornaBusinessException() {
         var exception = assertThrows(BusinessException.class, () -> enderecoService.deletar(EnderecoMock.LONG_ID, ClienteMock.LONG_ID));
         assertThat(exception.getMessage()).isEqualTo("Cliente não encontrado");
 
