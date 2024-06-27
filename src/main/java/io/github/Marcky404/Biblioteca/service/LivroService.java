@@ -24,8 +24,6 @@ public class LivroService {
 
     public void salvar(Livro livro) {
         repository.save(livro);
-
-
     }
 
     public Livro buscar(Long id) {
@@ -40,6 +38,7 @@ public class LivroService {
         Genero genero = generoService.buscar(livroRequest.getGenero().getId());
 
         livro.setTitulo(livroRequest.getTitulo());
+        livro.setAnoPublicacao(livroRequest.getAnoPublicacao());
         livro.setAutor(livroRequest.getAutor());
         livro.setNumeroPaginas(livroRequest.getNumeroPaginas());
         livro.setGenero(genero);
